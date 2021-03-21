@@ -24,9 +24,7 @@ class App extends Component {
   render() {
     return(
       <div>
-        <div className="flat-list" >
-          <FlatList flats={this.state.flats} imageUrl={this.state.imageUrl} />
-        </div>
+        <FlatList flats={this.state.flats} imageUrl={this.state.imageUrl} />
         <div className="map-container" >
           <SimpleMap />
         </div>
