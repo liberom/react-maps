@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 
 class Flat extends Component {
   handleClick = (event) => {
-
+    // console.log(event.target.attributes.lat.value);
+    this.props.selectFlat(event.target.attributes.lat.value, event.target.attributes.lon.value, event.target.attributes.price.value);
   }
-
-
-  // `background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url(${this.props.imageUrl};);`
 
   render() {
     return(
@@ -17,7 +15,7 @@ class Flat extends Component {
         <div className="card-description" >
           <h2> {this.props.name} </h2>
         </div>
-        <a className="card-link" href="#"></a>
+        <a className="card-link" href="#" lat={this.props.lat} lon={this.props.lon} price={this.props.price} ></a>
 
       </div>
     );

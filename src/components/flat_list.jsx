@@ -4,7 +4,7 @@ import Flat from './flat.jsx';
 
 class FlatList extends Component {
   renderList = () => {
-    return this.props.flats.map(flat => <Flat name={flat.name} price={flat.price} key={flat.price} flatStyle={this.props} imageUrl={flat.imageUrl} />);
+    return this.props.flats.map(flat => <Flat selectFlat={this.props.selectFlat} lat={flat.lat} lon={flat.lng} name={flat.name} price={flat.price} key={flat.price} imageUrl={flat.imageUrl} />);
   }
 
   render() {

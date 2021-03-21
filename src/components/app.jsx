@@ -16,17 +16,37 @@ class App extends Component {
 
     this.state = {
       flats: flatsData,
-      imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat5.jpg"
-      // selectedFlatPrice: 200
+      selectedLat: null,
+      selectedLon: null,
+      selectedPrice: null,
+      // imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat5.jpg"
+      center: {
+        lat: 59.95,
+        lng: 30.33
+      },
+      zoom: 11
     }
+  }
+
+  showMarker = (lat, lon, price) => {
+    this.setState({
+      selectedLat: lat,
+      selectedLon: lon,
+      selectedPrice: price,
+      center: {
+        lat: lat,
+        lng: lon
+      }
+    });
+
   }
 
   render() {
     return(
       <div>
-        <FlatList flats={this.state.flats} imageUrl={this.state.imageUrl} />
+        <FlatList flats={this.state.flats} selectFlat={this.showMarker} />
         <div className="map-container" >
-          <SimpleMap />
+          <SimpleMap center={this.state.center} zoom={this.state.zoom} lat={this.state.selectedLat} lon={this.state.selectedLon} price={this.state.selectedPrice} />
         </div>
       </div>
     );

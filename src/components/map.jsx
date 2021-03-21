@@ -6,13 +6,13 @@ import Marker from './marker.jsx';
 
 
 class SimpleMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33
-    },
-    zoom: 11
-  };
+  // static defaultProps = {
+  //   center: {
+  //     lat: 59.95,
+  //     lng: 30.33
+  //   },
+  //   zoom: 11
+  // };
 
   // const marker = ({ text }) => <div>{text}</div>;
 
@@ -22,13 +22,13 @@ class SimpleMap extends Component {
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          center={this.props.center}
+          zoom={this.props.zoom}
         >
           <Marker
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
+            lat={this.props.lat}
+            lng={this.props.lon}
+            text={this.props.price}
           />
         </GoogleMapReact>
       </div>
