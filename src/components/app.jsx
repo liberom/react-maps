@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import flats from '../data/flats.js';
+
 class App extends Component {
   render() {
     return(
