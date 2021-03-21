@@ -1,1 +1,3 @@
-flat.jsx
+import React, { Component } from 'react';
+
+export default Flat;
