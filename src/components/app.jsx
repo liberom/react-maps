@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-import flatsData from '../data/flats.js';
+import flats from '../data/flats.js';
 import FlatList from './flat_list.jsx';
 
 import Marker from './marker.jsx';
@@ -13,34 +13,21 @@ class App extends Component {
     super(props);
 
     this.state = {
-      flats: flatsData,
-      selectedLat: null,
-      selectedLon: null,
-      selectedPrice: null,
-      center: {
-        lat: 48.88,
-        lng: 2.34
-      },
-      zoom: 11
+      selectedFlat: flats[0],
+      flats
     }
   }
 
   center() {
     return {
-      lat: this.state.center.lat,
-      lng: this.state.center.lng
+      lat: 48.88,
+      lng: 2.34
     };
   }
 
-  showMarker = (lat, lon, price) => {
+  showMarker = (index) => {
     this.setState({
-      selectedLat: lat,
-      selectedLon: lon,
-      selectedPrice: price,
-      center: {
-        lat: lat,
-        lng: lon
-      }
+      selectedFlat: flats[index]
     });
 
   }
@@ -48,12 +35,11 @@ class App extends Component {
   render() {
     return(
       <div>
-        <FlatList flats={this.state.flats} selectFlat={this.showMarker} // selectedFlat={}
-        />
+        <FlatList flats={this.state.flats} selectFlat={this.showMarker} selectedFlat={this.state.selectedFlat} />
         <div className="map-container" >
-          <GoogleMapReact defaultCenter={this.center()} defaultZoom={this.state.zoom} // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+          <GoogleMapReact defaultCenter={this.center()} defaultZoom={12} // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
           >
-          <Marker lat={this.state.selectedLat} lng={this.state.selectedLon} text={this.state.selectedPrice} />
+          <Marker lat={this.state.selectedFlat.lat} lng={this.state.selectedFlat.lng} text={this.state.selectedFlat.price} />
         </GoogleMapReact>
         </div>
       </div>
