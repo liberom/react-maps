@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
 
 import flatsData from '../data/flats.js';
 import FlatList from './flat_list.jsx';
-import SimpleMap from './map.jsx';
+
+import Marker from './marker.jsx';
+// import SimpleMap from './map.jsx';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    // this.props = {
-    //   // flatStyle: {
-    //   //   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url({this.state.imageUrl};);
-    //   // }
-    // }
 
     this.state = {
       flats: flatsData,
       selectedLat: null,
       selectedLon: null,
       selectedPrice: null,
-      // imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat5.jpg"
       center: {
-        lat: 59.95,
-        lng: 30.33
+        lat: 48.88,
+        lng: 2.34
       },
       zoom: 11
     }
+  }
+
+  center() {
+    return {
+      lat: this.state.center.lat,
+      lng: this.state.center.lng
+    };
   }
 
   showMarker = (lat, lon, price) => {
@@ -44,9 +48,13 @@ class App extends Component {
   render() {
     return(
       <div>
-        <FlatList flats={this.state.flats} selectFlat={this.showMarker} />
+        <FlatList flats={this.state.flats} selectFlat={this.showMarker} // selectedFlat={}
+        />
         <div className="map-container" >
-          <SimpleMap center={this.state.center} zoom={this.state.zoom} lat={this.state.selectedLat} lon={this.state.selectedLon} price={this.state.selectedPrice} />
+          <GoogleMapReact defaultCenter={this.center()} defaultZoom={this.state.zoom} // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+          >
+          <Marker lat={this.state.selectedLat} lng={this.state.selectedLon} text={this.state.selectedPrice} />
+        </GoogleMapReact>
         </div>
       </div>
     );
@@ -54,3 +62,5 @@ class App extends Component {
 }
 
 export default App;
+
+// <SimpleMap center={this.state.center} zoom={this.state.zoom} lat={this.state.selectedLat} lon={this.state.selectedLon} price={this.state.selectedPrice} />
